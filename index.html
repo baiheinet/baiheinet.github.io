@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!-- saved from url=(0023)https://datatables.net/ -->
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<title>KIPIC项目管理系统 | the fast &amp; easy way</title>
+
+	<link rel="shortcut icon" type="image/png" href="https://datatables.net/media/images/favicon.png">
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.datatables.net/rss.xml">
+
+	<link rel="stylesheet" href="./site.css">
+	<!--[if lte IE 9]>
+		<link rel="stylesheet" type="text/css" href="/media/css/ie.css" />
+		<![endif]-->
+	<link rel="stylesheet" href="./responsive.dataTables.min.css">
+	<style>
+		div.fw-container div.fw-body div.content {
+			margin-top: 5em;
+		}
+
+		div.fw-body h1 {
+			display: none;
+		}
+
+		div.fw-container {
+			z-index: 1;
+		}
+	</style>
+
+
+	<script src="./site.js"></script>
+	<script src="./dynamic.php" async=""></script>
+	<script src="./dataTables.responsive.min.js"></script>
+	<script>
+		var table
+		var dtconfig ={
+			//destroy: true,
+			processing: true,
+			//serverSide: true,
+			deferRender: true,
+			responsive: true,
+			language: {
+				url: 'https://cdn.datatables.net/plug-ins/1.10.16/i18n/Chinese.json'
+			},					
+			columnDefs: [
+				{ targets: [-1, -3], className: 'dt-body-right' }
+			],
+			ajax: {
+				url: "https://runkit.io/baiheinet/5aeffc183271ba001234c770/branches/master/drawindex",//"https://runkit.io/baiheinet/5ae995d21497070012bde95a/branches/master/weldmapindex",//"../foxtable/webqq/weldmap/Results.json",
+				dataSrc: ""
+			},
+			columns: [
+				{ data: "ISO" },
+				{ data: "Rev" },
+				{ data: "Date" },
+				{ data: "Link"}
+			],
+			columnDefs: [
+				{
+					render: function(data, type, row, meta) {
+						//渲染 把数据源中的标题和url组成超链接
+						return '<a href="' + row.Link + '" target="_blank">' + data + '</a>';
+					},
+					//指定是一列
+					targets: 0
+				},
+				{ "visible": false,  "targets": [ 3 ] }
+				]
+
+		};
+
+		$(document).ready(function () {
+			table = $('#example').addClass('nowrap').DataTable(dtconfig);
+			
+		});
+
+
+		//更换数据源（相同格式，但是数据内容不同）
+		$("#WeldMap_Index ").click(function() {
+			//table.destroy();			
+			//dtconfig.ajax.url = 'https://runkit.io/baiheinet/5aeffc183271ba001234c770/branches/master/weldmapindex';
+			//table = $('#example').addClass('nowrap').DataTable(dtconfig);
+			table.ajax.url('https://runkit.io/baiheinet/5aeffc183271ba001234c770/branches/master/weldmapindex').load()
+		});
+
+	</script>
+</head>
+
+<body class="wide hero" style="">
+	<a name="top"></a>
+
+	<div class="fw-background">
+		<div>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+
+	<div class="fw-container">
+		<div class="fw-header">
+			<div class="nav-master">
+				<div class="nav-item active">
+					<a href="/">KIPIC项目管理系统-INDEX速查</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="fw-hero">
+			<h1></h1>	
+			<div class="grid">
+				<div class="unit w-1-3">
+						<div class="hero-item">
+								
+								Include these files
+								<span class="icon i-arrow-down"></span>
+						</div>
+						<div class="hero-item">
+								<span class="number">1</span>								
+								<button id="Draw_Index">Draw_Index</button>
+								<span class="icon i-arrow-right"></span>
+						</div>
+						<div class="hero-item">
+								<span class="number">2</span>								
+								<button id="WeldMap_Index">WeldMap_Index</button>
+								<span class="icon i-arrow-right"></span>
+						</div>
+						<div class="hero-item">
+								<span class="number">3</span>								
+								Transmittal_Index
+								<span class="icon i-arrow-right"></span>
+						</div>
+						<div class="hero-item">
+								<span class="number">4</span>								
+								Letter_Index
+								<span class="icon i-arrow-right"></span>
+						</div>
+						<div class="hero-item">
+								<span class="number">5</span>								
+								Regulation_Index
+								<span class="icon i-arrow-right"></span>
+						</div>
+				</div>
+				<div class="unit w-2-3">
+					<div class="hero-callout">
+						<div id="example_wrapper" class="dataTables_wrapper">
+							<table id="example" class="display nowrap dataTable dtr-inline collapsed" style="width: 100%;" role="grid" aria-describedby="example_info">
+								<thead>
+									<tr>
+										<th>ISO</th>
+										<th>Rev</th>
+										<th>Date</th>
+										<th>Link</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>ISO</th>
+										<th>Rev</th>
+										<th>Date</th>
+										<th>Link</th>
+									</tr>
+								</tfoot>
+							</table>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+
+	</div>
+	<div class="fw-footer">
+		<div class="skew"></div>
+		<div class="skew-bg"></div>
+		<div class="copyright">
+			<h4>DataTables表格UI</h4>
+			<p>
+				DataTables designed and created by <a href="//sprymedia.co.uk">SpryMedia Ltd</a>.<br>
+				&copy; 2007-2018 Sinopec Fifth Construction Company Limited.
+			</p>
+		</div>
+	</div>	
+	</div>
