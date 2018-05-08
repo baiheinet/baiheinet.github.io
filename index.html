@@ -73,16 +73,17 @@
 		$(document).ready(function () {
 			table = $('#example').addClass('nowrap').DataTable(dtconfig);
 			
+			//更换数据源（相同格式，但是数据内容不同）
+			$("#Draw_Index").click(function() {
+				table.ajax.url('https://runkit.io/baiheinet/5aeffc183271ba001234c770/branches/master/drawindex').load()
+			});
+			$("#WeldMap_Index").on( "click", function( event ) {
+				table.ajax.url('https://runkit.io/baiheinet/5aeffc183271ba001234c770/branches/master/weldmapindex').load()
+			});			
 		});
 
 
-		//更换数据源（相同格式，但是数据内容不同）
-		$("#Draw_Index").click(function() {
-			table.ajax.url('https://runkit.io/baiheinet/5aeffc183271ba001234c770/branches/master/drawindex').load()
-		});
-		$("#WeldMap_Index").on( "click", function( event ) {
-			table.ajax.url('https://runkit.io/baiheinet/5aeffc183271ba001234c770/branches/master/weldmapindex').load()
-		});
+
 	</script>
 </head>
 
