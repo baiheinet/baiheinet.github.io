@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="site.css">
 	<!--[if lte IE 9]>
 		<link rel="stylesheet" type="text/css" href="/media/css/ie.css" />
-		<![endif]-->
+	<![endif]-->
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css">
 	<style>
@@ -35,12 +35,12 @@
 	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
 	<script>
-		var table
+		var currentSource = "https://runkit.io/baiheinet/5aeffc183271ba001234c770/branches/master/drawindex";
+
 		var dtconfig ={
-			//destroy: true,
 			processing: true,
 			serverSide: true,
-			searching: false,  //禁用原生搜索
+			//searching: false,  //禁用原生搜索
             orderMulti: false,  //启用多列排序
 			order: [],  //取消默认排序查询,否则复选框一列会出现小箭头
 			deferRender: true,
@@ -61,7 +61,7 @@
                 //console.log(param);
                 //ajax请求数据
                 $.ajax({
-                    url: "https://runkit.io/baiheinet/5aeffc183271ba001234c770/branches/master/drawindex",
+                    url: currentSource,
 					//dataSrc: "",
                     cache: false,  //禁用缓存
                     data: param,  //传入组装的参数
@@ -101,14 +101,17 @@
 		};
 
 		$(document).ready(function () {
-			table = $('#example').addClass('nowrap').DataTable(dtconfig);
+			table = $('#example').addClass('nowrap').dataTable(dtconfig);
 			
 			//更换数据源（相同格式，但是数据内容不同）
 			$("#Draw_Index").click(function() {
-				table.ajax.url('https://runkit.io/baiheinet/5aeffc183271ba001234c770/branches/master/drawindex').load()
+				//table.ajax.url('').load()
+				currentSource = "https://runkit.io/baiheinet/5aeffc183271ba001234c770/branches/master/drawindex";
+    			table.fnDraw(); //or fnReloadAjax()
 			});
 			$("#WeldMap_Index").on( "click", function( event ) {
-				table.ajax.url('https://runkit.io/baiheinet/5aeffc183271ba001234c770/branches/master/weldmapindex').load()
+				currentSource = "https://runkit.io/baiheinet/5aeffc183271ba001234c770/branches/master/weldmapindex";
+    			table.fnDraw(); //or fnReloadAjax()
 			});			
 		});
 
